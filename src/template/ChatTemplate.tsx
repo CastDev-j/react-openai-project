@@ -28,7 +28,7 @@ const initialMessages: Message[] = [
   },
 ];
 
-export const OrthographyPage = () => {
+export const ChatTemplate = () => {
   const messageEndRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>(initialMessages);

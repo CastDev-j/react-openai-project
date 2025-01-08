@@ -1,21 +1,27 @@
 ---
-import type { MenuRoute } from '@/interfaces'
-
+import type { MenuRoute } from "@/interfaces";
 
 interface Props {
-  data: MenuRoute,
+  data: MenuRoute;
 }
 
 const { data } = Astro.props;
 
+const { Icon, description, path, title } = data;
 ---
 
-<li class="flex flex-row gap-2 items-center">
-  <a href={
-    data.path
-  } class="text-neutral-100 hover:text-neutral-200">
-    {
-      data.title
-    }
-    </a>
+<li
+  class="cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-all duration-300 rounded-lg"
+>
+  <a href={path} class="flex items-center gap-4 py-3.5 px-2">
+    <Icon
+      className="w-5 h-5 text-neutral-500 dark:text-neutral-400"
+      aria-hidden="true"
+    />
+    <div>
+      <h5 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+        {title}
+      </h5>
+    </div>
+  </a>
 </li>

@@ -2,12 +2,13 @@
 import Layout from "@/layouts/Layout.astro";
 import Dashboard from "@/components/shared/Dashboard.astro";
 import { OrthographyPage } from "@/components/OrthographyPage";
-
 ---
 
 <Layout title="React - GPT | Orthography">
-	<Dashboard>
-		<OrthographyPage client:load>
-	</Dashboard>
+  <Dashboard>
+    <OrthographyPage client:load />
+  </Dashboard>
+  <h1 class="text-xl font-normal w-full text-center text-neutral-100 opacity-50">
+    Orthography mode
+  </h1>
 </Layout>
-
