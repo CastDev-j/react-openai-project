@@ -1,13 +1,15 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import Dashboard from "@/components/shared/Dashboard.astro";
 import { ProsConsStreamPage } from "@/components/ProsConsStreamPage";
+import LayoutWithoutFooter from "@/layouts/LayoutWithoutFooter.astro";
+import PageFooterProps from "@/components/shared/PageFooterMode.astro";
 
 ---
 
-<Layout title="React - GPT | Pros Cons Stream">
+<LayoutWithoutFooter title="React - GPT | Pros Cons Stream">
 	<Dashboard>
 		<ProsConsStreamPage client:load>
 	</Dashboard>
-</Layout>
+	<PageFooterProps text="Pros Cons Stream model" />
+</LayoutWithoutFooter>
 

@@ -1,13 +1,13 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import Dashboard from "@/components/shared/Dashboard.astro";
 import { AssistantPage } from "@/components/AssistantPage";
-
+import LayoutWithoutFooter from "@/layouts/LayoutWithoutFooter.astro";
+import PageFooterProps from "@/components/shared/PageFooterMode.astro";
 ---
 
-<Layout title="React - GPT | Image Generation">
-	<Dashboard>
-		<AssistantPage client:load>
-	</Dashboard>
-</Layout>
-
+<LayoutWithoutFooter title="React - GPT | Image Generation">
+  <Dashboard>
+    <AssistantPage client:load />
+  </Dashboard>
+  <PageFooterProps text="Assistant model" />
+</LayoutWithoutFooter>

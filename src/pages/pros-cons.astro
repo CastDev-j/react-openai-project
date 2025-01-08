@@ -1,13 +1,15 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import Dashboard from "@/components/shared/Dashboard.astro";
 import { ProsConsPage } from "@/components/ProsConsPage";
+import LayoutWithoutFooter from "@/layouts/LayoutWithoutFooter.astro";
+import PageFooterProps from "@/components/shared/PageFooterMode.astro";
 
 ---
 
-<Layout title="React - GPT | Pros Cons">
+<LayoutWithoutFooter title="React - GPT | Pros Cons">
 	<Dashboard>
 		<ProsConsPage client:load>
 	</Dashboard>
-</Layout>
+	<PageFooterProps text="Pros Cons model" />
+</LayoutWithoutFooter>
 

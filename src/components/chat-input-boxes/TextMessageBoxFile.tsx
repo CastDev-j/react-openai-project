@@ -1,0 +1,103 @@
+import { useState } from "react";
+import { FaPaperclip, FaPaperPlane } from "react-icons/fa";
+import { useRef, useEffect } from "react";
+
+interface TextMessageBoxFileProps {
+  onSendMessage: (message: string) => void;
+  placeholder: string;
+  disableCorrections?: boolean;
+  accept?: string;
+}
+
+export const TextMessageBoxFile = ({
+  onSendMessage,
+  placeholder,
+  disableCorrections,
+  accept,
+}: TextMessageBoxFileProps) => {
+  const [message, setMessage] = useState("");
+  const inputFileRef = useRef<HTMLInputElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  const [selectedFile, setSelectedFile] = useState<File | null>();
+
+  const scrollToTextArea = () => {
+    textAreaRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToTextArea();
+  }, []);
+
+  const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (message.trim().length === 0) return;
+
+    onSendMessage(message);
+    setMessage("");
+  };
+
+  return (
+    <>
+      <form
+        onSubmit={handleSendMessage}
+        className="flex flex-col gap-4 px-2 py-3 items-center rounded-xl bg-neutral-700"
+      >
+        <div className="flex-grow w-full">
+          <textarea
+            autoFocus
+            name="message"
+            className="flex w-full rounded-lg px-4 py-2 bg-neutral-700 placeholder-neutral-300 text-neutral-100 outline-none resize-none"
+            placeholder={placeholder}
+            autoComplete={disableCorrections ? "off" : "on"}
+            autoCorrect={disableCorrections ? "off" : "on"}
+            spellCheck={disableCorrections ? "false" : "true"}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            ref={textAreaRef}
+          />
+        </div>
+
+        <div className="flex w-full justify-between">
+          <div className="flex gap-2 justify-center items-center">
+            <button
+              type="button"
+              className={`ml-2 flex items-center justify-center px-4 py-2 rounded-lg gap-2 bg-neutral-100 text-neutral-900 hover:bg-neutral-400 transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-800`}
+              onClick={() => inputFileRef.current?.click()}
+            >
+              <FaPaperclip />
+            </button>
+
+            <p
+              className="text-neutral-300 text-sm truncate w-32"
+            >
+              {selectedFile ? selectedFile.name : ""}
+            </p>
+            <input
+              ref={inputFileRef}
+              type="file"
+              className="hidden"
+              accept={accept}
+              onChange={(e) => {
+                const file = e.target.files?.item(0);
+                if (file) {
+                  setSelectedFile(file);
+                }
+              }}
+            />
+          </div>
+
+          <button
+            type="submit"
+            disabled={!selectedFile || message.trim().length === 0}
+            className={`flex items-center justify-center px-4 py-2 rounded-lg gap-2 bg-neutral-100 text-neutral-900 hover:bg-neutral-400 transition-all duration-200 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-800`}
+          >
+            <span>Enviar</span>
+            <FaPaperPlane />
+          </button>
+        </div>
+      </form>
+    </>
+  );
+};

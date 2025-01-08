@@ -1,13 +1,15 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import Dashboard from "@/components/shared/Dashboard.astro";
 import { ImageTunningPage } from "@/components/ImageTunningPage";
+import LayoutWithoutFooter from "@/layouts/LayoutWithoutFooter.astro";
+import PageFooterProps from "@/components/shared/PageFooterMode.astro";
 
 ---
 
-<Layout title="React - GPT | Image Tunning">
+<LayoutWithoutFooter title="React - GPT | Image Tunning">
 	<Dashboard>
 		<ImageTunningPage client:load>
 	</Dashboard>
-</Layout>
+	<PageFooterProps text="Image Tunning model" />
+</LayoutWithoutFooter>
 

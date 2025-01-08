@@ -1,10 +1,10 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import { menuRoutes } from "@/store/routes";
 import RouteCardComponent from "@/components/shared/RouteCardComponent.astro";
+import LayoutWithoutFooter from "@/layouts/LayoutWithoutFooter.astro";
 ---
 
-<Layout title="React - GPT | Inicio">
+<LayoutWithoutFooter title="React - GPT | Inicio">
   <h1 class="text-xl font-normal text-neutral-100">
     Elige una funcionalidad de IA para usar
   </h1>
@@ -16,4 +16,4 @@ import RouteCardComponent from "@/components/shared/RouteCardComponent.astro";
   >
     {menuRoutes.map((route) => <RouteCardComponent data={route} />)}
   </article>
-</Layout>
+</LayoutWithoutFooter>

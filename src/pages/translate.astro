@@ -1,13 +1,15 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import Dashboard from "@/components/shared/Dashboard.astro";
 import { TranslatePage } from "@/components/TranslatePage";
+import LayoutWithoutFooter from "@/layouts/LayoutWithoutFooter.astro";
+import PageFooterProps from "@/components/shared/PageFooterMode.astro";
 
 ---
 
-<Layout title="React - GPT | Translate">
+<LayoutWithoutFooter title="React - GPT | Translate">
 	<Dashboard>
 		<TranslatePage client:load>
 	</Dashboard>
-</Layout>
+	<PageFooterProps text="Translate model" />
+</LayoutWithoutFooter>
 

@@ -3,6 +3,7 @@ import { MyMessage } from "@/components/chat-bubbles/MyMessage";
 import { TextMessageBox } from "@/components/chat-input-boxes/TextMessageBox";
 import { TypingLoader } from "@/components/loaders/TypingLoader";
 import { useRef, useState, useEffect } from "react";
+import { FaInfo } from "react-icons/fa";
 
 interface Message {
   text: string;
@@ -62,7 +63,7 @@ export const ChatTemplate = () => {
             {/* Renderizado de mensajes */}
             {messages.map((msg, index) =>
               msg.isGpt ? (
-                <GptMessage key={index} text={msg.text} />
+                <GptMessage key={index} text={msg.text} Icon={FaInfo} />
               ) : (
                 <MyMessage key={index} text={msg.text} />
               )
@@ -87,4 +88,4 @@ export const ChatTemplate = () => {
       </div>
     </>
   );
-}; 
+};
