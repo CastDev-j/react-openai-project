@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Dashboard from "@/components/shared/Dashboard.astro";
+import { ImageGenerationPage } from "@/components/ImageGenerationPage";
+
+---
+
+<Layout title="React - GPT | Image Generation">
+	<Dashboard>
+		<ImageGenerationPage client:load>
+	</Dashboard>
+</Layout>
+

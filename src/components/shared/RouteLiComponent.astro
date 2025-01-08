@@ -1,0 +1,21 @@
+---
+import type { MenuRoute } from '@/interfaces'
+
+
+interface Props {
+  data: MenuRoute,
+}
+
+const { data } = Astro.props;
+
+---
+
+<li class="flex flex-row gap-2 items-center">
+  <a href={
+    data.path
+  } class="text-neutral-100 hover:text-neutral-200">
+    {
+      data.title
+    }
+    </a>
+</li>

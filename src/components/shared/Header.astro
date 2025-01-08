@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="p-4 bg-neutral-900 w-full appears flex justify-between gap-6">
+  <a href="/">
+    <h1 class="text-xl font-light tracking-wide text-center text-neutral-50">
+      {title}
+    </h1>
+  </a>
+
+  <a
+    href="/"
+    class="text-neutral-950 bg-neutral-300 hover:bg-neutral-400 focus:ring-4 focus:outline-none focus:ring-neutral-500 font-medium rounded-lg text-xs px-4 py-2 text-center inline-flex items-center me-1 mb-1"
+    aria-label="View Repository"
+  >
+    Volver al inicio
+  </a>
+</div>

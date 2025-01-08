@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Dashboard from "@/components/shared/Dashboard.astro";
+import { ProsConsPage } from "@/components/ProsConsPage";
+
+---
+
+<Layout title="React - GPT | Pros Cons">
+	<Dashboard>
+		<ProsConsPage client:load>
+	</Dashboard>
+</Layout>
+

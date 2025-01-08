@@ -1,0 +1,26 @@
+---
+
+---
+
+<article class="flex flex-row gap-12 text-neutral-100">
+  <nav
+    class="hidden sm:flex flex-col w-[370px] min-h-[calc(100vh-3.0rem)] bg-neutral-800 p-5 rounded-3xl shadow-lg"
+  >
+    <h1 class="font-bold text-lg lg:text-3xl text-white">
+      ReactGPT<span class="text-emerald-400">.</span>
+    </h1>
+    <span class="text-xl text-neutral-300">Bienvenido</span>
+
+    <div class="border-neutral-600 border my-3"></div>
+  </nav>
+
+  <section
+    class="flex flex-col w-full h-[calc(100vh-50px)] bg-neutral-800 p-5 rounded-3xl shadow-lg"
+  >
+    <div class="flex flex-row h-full">
+      <div class="flex flex-col flex-auto h-full p-1">
+        <slot />
+      </div>
+    </div>
+  </section>
+</article>
