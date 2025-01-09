@@ -6,3 +6,10 @@ export interface MenuRoute {
   title: string;
   description: string;
 }
+
+
+export interface OrthographyResponse {
+  userScore: number;
+  errors: string[];
+  message: string;
+}

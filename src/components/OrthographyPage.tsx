@@ -1,33 +1,25 @@
-import { GptMessage } from "@/components/chat-bubbles/GptMessage";
 import { MyMessage } from "@/components/chat-bubbles/MyMessage";
 import { TextMessageBox } from "@/components/chat-input-boxes/TextMessageBox";
 import { TypingLoader } from "@/components/loaders/TypingLoader";
 import { useRef, useState, useEffect } from "react";
 import { FaPenNib } from "react-icons/fa";
+import { GptOrthograpfyMessage } from "./chat-bubbles/GptOrthographyMessage";
+import { orthographyUseCase } from "@/core/use-cases/orthography.use-case";
 
 interface Message {
   text: string;
   isGpt: boolean;
+  isErrorMessage?: boolean;
+  info?: {
+    userScore?: number;
+    errors?: string[];
+    message?: string;
+  };
 }
 
-const initialMessages: Message[] = [
-  {
-    text: "¡Hola! ¿En qué puedo ayudarte hoy?",
-    isGpt: true,
-  },
-  {
-    text: "Quiero saber más sobre la ortografía",
-    isGpt: false,
-  },
-  {
-    text: "¡Claro! ¿En qué te puedo ayudar?",
-    isGpt: true,
-  },
-  {
-    text: "¿Cuáles son las reglas de la B y la V?",
-    isGpt: false,
-  },
-];
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const initialMessages: Message[] = [];
 
 export const OrthographyPage = () => {
   const messageEndRef = useRef<HTMLDivElement>(null);
@@ -46,13 +38,38 @@ export const OrthographyPage = () => {
     setMessages((prevMessages) => [...prevMessages, { text, isGpt: false }]);
 
     // Simular un tiempo de espera o llamar a la API
-    setTimeout(() => {
-      setLoading(false);
-      setMessages((prevMessages) => [
+
+    const resp = await orthographyUseCase({ prompt: text });
+
+    setLoading(false);
+    if (!resp.ok) {
+      return setMessages((prevMessages) => [
         ...prevMessages,
-        { text: "Respuesta simulada del servidor", isGpt: true },
+        {
+          text: "Orthography-GPT no está disponible en este momento",
+          isGpt: true,
+          isErrorMessage: true,
+          info: {
+            userScore: 0,
+            errors: [],
+            message: "Orthography-GPT no está disponible en este momento",
+          },
+        },
       ]);
-    }, 1000);
+    }
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      {
+        text: resp.message,
+        isGpt: true,
+        isErrorMessage: false,
+        info: {
+          userScore: resp.userScore,
+          errors: resp.errors,
+          message: resp.message,
+        },
+      },
+    ]);
   };
 
   return (
@@ -63,7 +80,14 @@ export const OrthographyPage = () => {
             {/* Renderizado de mensajes */}
             {messages.map((msg, index) =>
               msg.isGpt ? (
-                <GptMessage key={index} text={msg.text} Icon={FaPenNib}/>
+                <GptOrthograpfyMessage
+                  key={index}
+                  Icon={FaPenNib}
+                  isErrorMessage={msg.isErrorMessage}
+                  userScore={msg.info?.userScore ?? 0}
+                  errors={msg.info?.errors ?? []}
+                  message={msg.info?.message ?? ""}
+                />
               ) : (
                 <MyMessage key={index} text={msg.text} />
               )
@@ -82,7 +106,7 @@ export const OrthographyPage = () => {
 
         <TextMessageBox
           onSendMessage={handlePost}
-          placeholder="Escribe un mensaje"
+          placeholder="Escribe un texto largo para corregir la ortografía"
           disableCorrections={true}
         />
       </div>
