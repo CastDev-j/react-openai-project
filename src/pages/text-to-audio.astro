@@ -3,13 +3,11 @@ import Dashboard from "@/components/shared/Dashboard.astro";
 import { TextToAudioPage } from "@/components/TextToAudioPage";
 import LayoutWithoutFooter from "@/layouts/LayoutWithoutFooter.astro";
 import PageFooterProps from "@/components/shared/PageFooterMode.astro";
-
 ---
 
 <LayoutWithoutFooter title="React - GPT | Text to Audio">
-	<Dashboard>
-		<TextToAudioPage client:load>
-	</Dashboard>
-	<PageFooterProps text="Text to Audio model" />
+  <Dashboard>
+    <TextToAudioPage client:load />
+</Dashboard>
+<PageFooterProps text="Text to Audio model" />
 </LayoutWithoutFooter>
-

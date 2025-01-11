@@ -13,3 +13,7 @@ export interface OrthographyResponse {
   errors: string[];
   message: string;
 }
+
+export interface ProsConsMessage {
+  content: string;
+}

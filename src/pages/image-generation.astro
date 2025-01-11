@@ -3,13 +3,11 @@ import Dashboard from "@/components/shared/Dashboard.astro";
 import { ImageGenerationPage } from "@/components/ImageGenerationPage";
 import LayoutWithoutFooter from "@/layouts/LayoutWithoutFooter.astro";
 import PageFooterProps from "@/components/shared/PageFooterMode.astro";
-
 ---
 
 <LayoutWithoutFooter title="React - GPT | Image Generation">
-	<Dashboard>
-		<ImageGenerationPage client:load>
-	</Dashboard>
-	<PageFooterProps text="Image Generation model" />
+  <Dashboard>
+    <ImageGenerationPage client:load />
+</Dashboard>
+<PageFooterProps text="Image Generation model" />
 </LayoutWithoutFooter>
-

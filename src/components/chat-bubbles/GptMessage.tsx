@@ -1,5 +1,6 @@
 import type { ComponentType, SVGProps } from "react";
 import Markdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 
 interface GptMessageProps {
   text: string;
@@ -26,7 +27,7 @@ export const GptMessage = ({ text, Icon, isErrorMessage }: GptMessageProps) => {
               isErrorMessage ? "bg-red-500" : "bg-black"
             }`}
           >
-            <Markdown>{text}</Markdown>
+            <Markdown  remarkPlugins={[remarkGfm]}>{text}</Markdown>
           </div>
         </div>
       </div>

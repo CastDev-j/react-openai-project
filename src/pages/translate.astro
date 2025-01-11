@@ -3,13 +3,11 @@ import Dashboard from "@/components/shared/Dashboard.astro";
 import { TranslatePage } from "@/components/TranslatePage";
 import LayoutWithoutFooter from "@/layouts/LayoutWithoutFooter.astro";
 import PageFooterProps from "@/components/shared/PageFooterMode.astro";
-
 ---
 
 <LayoutWithoutFooter title="React - GPT | Translate">
-	<Dashboard>
-		<TranslatePage client:load>
-	</Dashboard>
-	<PageFooterProps text="Translate model" />
+  <Dashboard>
+    <TranslatePage client:load />
+  </Dashboard>
+  <PageFooterProps text="Translate model" />
 </LayoutWithoutFooter>
-

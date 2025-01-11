@@ -17,16 +17,21 @@ interface Message {
   };
 }
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-const initialMessages: Message[] = [];
+const initialMessages: Message[] = [
+  {
+    text: "",
+    isGpt: true,
+    info: {
+      message: "¡Bienvenido al apartado de correcciones! Aquí podrás mejorar la ortografía y gramática de tus textos para que sean más claros y profesionales. 😊",
+    },
+  },
+];
 
 export const OrthographyPage = () => {
   const messageEndRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>(initialMessages);
 
-  // Desplaza la vista al último mensaje
   useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -36,8 +41,6 @@ export const OrthographyPage = () => {
   const handlePost = async (text: string) => {
     setLoading(true);
     setMessages((prevMessages) => [...prevMessages, { text, isGpt: false }]);
-
-    // Simular un tiempo de espera o llamar a la API
 
     const resp = await orthographyUseCase({ prompt: text });
 
@@ -106,7 +109,7 @@ export const OrthographyPage = () => {
 
         <TextMessageBox
           onSendMessage={handlePost}
-          placeholder="Escribe un texto largo para corregir la ortografía"
+          placeholder="Escribe un texto para corregir la ortografía"
           disableCorrections={true}
         />
       </div>
