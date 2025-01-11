@@ -15,7 +15,7 @@ interface ProsConsMessage {
 
 const initialMessages: ProsConsMessage[] = [
   {
-    text: "¡Bienvenido al apartado de comparación de pros y contras! Aquí podrás analizar los argumentos a favor y en contra de un tema para tomar decisiones más informadas. 😊",
+    text: "Estás hablando con ProsCons-GPT, tu asistente para discutir pros y contras. 😊",
     isGpt: true,
     isErrorMessage: false,
   },
@@ -93,7 +93,7 @@ export const ProsConsPage = () => {
 
         <TextMessageBox
           onSendMessage={handlePost}
-          placeholder="Escribe un texto para corregir la ortografía"
+          placeholder="Escribe una comparación para analizar pros y contras"
           disableCorrections={true}
         />
       </div>
