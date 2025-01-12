@@ -49,13 +49,13 @@ export const OrthographyPage = () => {
       return setMessages((prevMessages) => [
         ...prevMessages,
         {
-          text: "Orthography-GPT no está disponible en este momento",
+          text: "Orthography-GPT ha tenido un error",
           isGpt: true,
           isErrorMessage: true,
           info: {
             userScore: 0,
             errors: [],
-            message: "Orthography-GPT no está disponible en este momento",
+            message: "Orthography-GPT ha tenido un error",
           },
         },
       ]);

@@ -44,6 +44,6 @@ export async function* translateUseCase({
       yield message;
     }
   } catch (error) {
-    return null;
+    throw new Error("No se pudo obtener una respuesta del servidor");
   }
 }

@@ -42,41 +42,50 @@ export const TranslatePage = () => {
     isRunning.current = true;
     setMessages((prevMessages) => [...prevMessages, { text, isGpt: false }]);
 
-    const stream = translateUseCase({
-      prompt: text,
-      abortSignal: abortController.current.signal,
-    });
-    setLoading(false);
+    try {
+      const stream = translateUseCase({
+        prompt: text,
+        abortSignal: abortController.current.signal,
+      });
 
-    if (!stream) {
+      setLoading(false);
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          isGpt: true,
+          isErrorMessage: false,
+          text: "",
+        },
+      ]);
+
+      for await (const message of stream) {
+        setMessages((prevMessages) => {
+          const newMessages = [...prevMessages];
+          newMessages[newMessages.length - 1].text = message;
+          newMessages[newMessages.length - 1].isErrorMessage = false;   
+          return newMessages;
+        });
+      }
+
+      isRunning.current = false;
+    } catch (error) {
+
+      setMessages((prevMessages) => {
+        const newMessages = [...prevMessages];
+        newMessages.pop();
+        return newMessages;
+      });
+
       return setMessages((prevMessages) => [
         ...prevMessages,
         {
-          text: "ProsConsStream-GPT no está disponible en este momento",
+          text: "Translate-GPT ha tenido un error",
           isGpt: true,
           isErrorMessage: true,
         },
       ]);
     }
-
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      {
-        isGpt: true,
-        isErrorMessage: false,
-        text: "",
-      },
-    ]);
-
-    for await (const message of stream) {
-      setMessages((prevMessages) => {
-        const newMessages = [...prevMessages];
-        newMessages[newMessages.length - 1].text = message;
-        return newMessages;
-      });
-    }
-
-    isRunning.current = false;
   };
 
   return (

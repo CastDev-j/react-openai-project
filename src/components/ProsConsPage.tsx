@@ -44,7 +44,7 @@ export const ProsConsPage = () => {
       return setMessages((prevMessages) => [
         ...prevMessages,
         {
-          text: "ProsCons-GPT no está disponible en este momento",
+          text: "ProsCons-GPT ha tenido un error",
           isGpt: true,
           isErrorMessage: true,
         },
