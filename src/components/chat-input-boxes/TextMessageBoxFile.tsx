@@ -3,7 +3,7 @@ import { FaPaperclip, FaPaperPlane } from "react-icons/fa";
 import { useRef, useEffect } from "react";
 
 interface TextMessageBoxFileProps {
-  onSendMessage: (message: string) => void;
+  onSendMessage: (message: string, file: File) => void;
   placeholder: string;
   disableCorrections?: boolean;
   accept?: string;
@@ -32,10 +32,11 @@ export const TextMessageBoxFile = ({
   const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (message.trim().length === 0) return;
+    if (message.trim().length === 0 || !selectedFile) return;
 
-    onSendMessage(message);
+    onSendMessage(message, selectedFile);
     setMessage("");
+    setSelectedFile(null);
   };
 
   return (
@@ -80,6 +81,8 @@ export const TextMessageBoxFile = ({
               className="hidden"
               accept={accept}
               onChange={(e) => {
+                console.log(e.target.files);
+                
                 const file = e.target.files?.item(0);
                 if (file) {
                   setSelectedFile(file);

@@ -7,7 +7,7 @@ import PageFooterProps from "@/components/shared/PageFooterMode.astro";
 
 <LayoutWithoutFooter title="React - GPT | Image Generation">
   <Dashboard>
-    <AssistantPage client:load />
+    <AssistantPage client:visible />
   </Dashboard>
   <PageFooterProps text="Assistant model" />
 </LayoutWithoutFooter>

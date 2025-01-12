@@ -7,7 +7,7 @@ import PageFooterProps from "@/components/shared/PageFooterMode.astro";
 
 <LayoutWithoutFooter title="React - GPT | Translate">
   <Dashboard>
-    <TranslatePage client:load />
+    <TranslatePage client:visible />
   </Dashboard>
   <PageFooterProps text="Translate model" />
 </LayoutWithoutFooter>
